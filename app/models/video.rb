@@ -6,7 +6,7 @@ class Video < ActiveRecord::Base
   # @return [Video] a video
   #
   def self.random
-    where('id <= ?', rand(maximum('id')) + 1).first
+    order('RANDOM()').first
   end
 
   # Returns a random video, except for one that has an ID that is passed in
@@ -15,8 +15,7 @@ class Video < ActiveRecord::Base
   # @return [Video] a random video
   #
   def self.random_except(*ids)
-    n = rand(maximum('id')) + 1
-    where('(id <= ? OR id >= ?) AND id NOT IN (?)', n, n, ids.flatten).first
+    where('id NOT IN (?)', ids.flatten).random
   end
 
   def title
