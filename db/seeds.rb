@@ -1,6 +1,5 @@
-videos = YAML.load_file(File.expand_path('../../config/videos.yml', __FILE__))
-
-videos.each do |video_data|
+archive = VideoArchive.new(File.expand_path('../../config/videos.csv', __FILE__))
+archive.each do |video_data|
   video_data = video_data.symbolize_keys!
 
   if video = Video.find_by_youtube_id(video_data[:youtube_id])
