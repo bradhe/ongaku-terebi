@@ -5,7 +5,7 @@ archive.each do |video_data|
   if video = Video.find_by_youtube_id(video_data[:youtube_id])
     video.update_attributes(video_data)
   else
-    puts "WARNING: Adding video #{video_data[:track_name].inspect} by #{video_data[:artist]}"
+    puts "NOTE: Adding video #{video_data[:track_name].inspect} by #{video_data[:artist]}"
     Video.create!(video_data)
   end
 end
